@@ -209,6 +209,8 @@
                 newArr.push(arrayTime.join(""));
 
             }
+            console.log("Array",array );
+            console.log("New Array", newArr);
 
             var upperCase =[];
             var endArray = [];
@@ -220,12 +222,15 @@
                     }
                 }
             });
+        
+            console.log("UpperCase", upperCase);
 
             for(var i = 0; i<upperCase.length; i++){
                 if(i==0){
                     endArray.push(upperCase[i]);
                 } else {
                     endArray.push(upperCase[i] + newArr[i].toLowerCase().substring(0, newArr[i].length - 1));
+                    console.log("Iteration " + i + " array " + endArray);
                 }
                 
             }
