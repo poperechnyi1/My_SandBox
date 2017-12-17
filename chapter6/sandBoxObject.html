@@ -9,48 +9,23 @@
 
 <body>
     <script>
-        // var whiteRabbit = {
-        //     type: "white",
-        //     speak: speak
-        // };
-        // var fatRabbit = {
-        //     type: "fat",
-        //     speak: speak
-        // };
-
-        // function speak(line){
-        //     console.log("A " + this.type + " кролик говорит " + line);
-        // }
-
-        // speak.apply(fatRabbit, ["Отрыжка!"]);
-
-        // speak.call({type: "старый"}, "Oh god");
-        
-
-        var protoRabbit = {
-            speak: function (line) {
-                console.log("A " + this.type + " кролик говорит " + line);
-            }
+        var whiteRabbit = {
+            type: "white",
+            speak: speak
+        };
+        var fatRabbit = {
+            type: "fat",
+            speak: speak
         };
 
-        var killerRabbit = Object.create(protoRabbit);
-        killerRabbit.type = "убийственный";
-        killerRabbit.speak("ХРЯЯЯСЬ!");
-
-
-        function Rabbit(type) {
-            this.type = type;
-        }
-
-        var killerRabbit = new Rabbit("убийственный");
-        var blackRabbit = new Rabbit("чёрный");
-
-        Rabbit.prototype.speak = function (line) {
+        function speak(line){
             console.log("A " + this.type + " кролик говорит " + line);
         }
 
-        console.log(blackRabbit.type);
-        blackRabbit.speak("Всем капец...")
+        speak.apply(fatRabbit, ["Отрыжка!"]);
+
+        speak.call({type: "старый"}, "Oh god");
+        
     </script>
 </body>
 
