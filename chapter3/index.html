@@ -1,0 +1,61 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chaptre 2 Functions</title>
+</head>
+<body>
+    <script>
+        function mini(a,b){
+            return Math.min(a,b);
+        }
+
+        console.log(mini(10,5));
+        console.log(mini(0,-10));
+        console.log(mini(0,10));
+
+        function isEven(r){
+            if(r%2===0){
+                return true;
+            } else {
+                return false;
+            } 
+        }
+
+        console.log(isEven(50));
+        console.log(isEven(75));
+        console.log(isEven(-1));
+
+        console.log("countsBs");
+
+        function countsBs(str){
+            var count = 0;
+            for(var i = 0; i<str.length; i++){
+                if(str.charAt(i)=="B"){
+                   count++; 
+                }
+            }
+            console.log(count);
+        }
+
+        countsBs("ABBARTB");
+        countsBs("BBBARTB");
+        countsBs("BBBBBBB");
+
+        console.log("countsChar");
+
+        function countsChar(str, char){
+            var count = 0;
+            for(var i = 0; i<str.length; i++){
+                str.charAt(i)===char?count++:count+=0;
+            }
+            console.log(count);
+        }
+
+        countsChar("fdfgrhsrgthyh", "f");
+        countsChar("SSSSS", "S");
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="ancestry.js"></script>
+    <script>
+        console.log("EXERCISES");
+        //////////////////////////////////////////////////////////
+        var arrays = [
+            [1, 2, 3],
+            [4, 5],
+            [6]
+        ];
+        console.log(arrays.reduce(function (firstElem, nextElem) {
+            return firstElem.concat(nextElem);
+        }));
+
+        ///////////////////////////////////////////////////////
+
+        console.log();
+
+
+        var difference = ancestry.filter(function (person) {
+            return byName[person.mother] != null;
+        }).map(function (person) {
+            return person.born - byName[person.mother].born;
+        });
+        console.log(difference);
+
+        console.log(average(difference));
+
+
+
+        /////////////////////////////////////////////////////////////////////
+
+        /////MY SOLUTION//////////////////////////////
+
+        // var middle = ancestry;
+        // middle.map(function (person) {
+        //     person.century = Math.ceil(person.died / 100);
+        // });
+
+        // console.log(middle);
+
+        // var minCen = middle[0].century;
+        // var maxCen = minCen;
+        // for (var i = 0; i < middle.length; i++) {
+        //     if (middle[i].century < minCen) minCen = middle[i].century;
+        //     if (middle[i].century > maxCen) maxCen = middle[i].century;
+        // }
+
+        // console.log(minCen);
+        // console.log(maxCen);
+
+        // function filterByCenturies(min, max, array) {
+        //     var personsGroupedByCentury = [];
+        //     var count = 0;
+        //     for (var i = min; i <= max; i++) {
+        //         personsGroupedByCentury.push(array.filter(function (person) {
+        //             person.yearsLive = person.died - person.born;
+        //             return person.century == i;
+        //         }));
+        //         // count ++;
+        //     }
+        //     return personsGroupedByCentury;
+        // }
+
+        // console.log(filterByCenturies(minCen, maxCen, middle));
+
+        // function getNumerableArray(array) {
+        //     var agesArrays = [];
+        //     for (var i = 0; i < array.length; i++) {
+        //         agesArrays.push(array[i].map(function (element) {
+        //             return element.yearsLive;
+        //         }));
+        //     }
+
+        //     return agesArrays;
+        // }
+
+        // console.log(getNumerableArray(filterByCenturies(minCen, maxCen, middle)));
+
+        // var numarebleArray = getNumerableArray(filterByCenturies(minCen, maxCen, middle));
+
+        // function getMiddleAgesInGroup (array, callback){
+        //     var arrayMiddles = [];
+        //    for(var i = 0; i<array.length; i++){
+        //      arrayMiddles.push(average(array[i]));
+        //    }
+
+        //    return callback(arrayMiddles);
+        // }
+
+        // console.log(getMiddleAgesInGroup(numarebleArray, function(array){
+        //     var counterStart = minCen;
+        //     for(var i = 0; i<array.length; i++){
+        //         console.log(counterStart + ": " + array[i]);
+        //         counterStart++;
+        //     }
+        // }));
+
+        ///////////////BOOK SOLUTION///////////////
+
+
+        function groupBy(array, groupOf) {
+            var groups = {};
+            array.forEach(function (element) {
+                var groupName = groupOf(element);
+                if (groupName in groups) {
+                    groups[groupName].push(element);
+                } else {
+                    groups[groupName] = [element];
+                }
+            });
+            return groups;
+        }
+
+        var byCentury = groupBy(ancestry, function (person) {
+            return Math.ceil(person.died / 100);
+        });
+
+        console.log(byCentury);
+
+        for (var century in byCentury) {
+            var ages = byCentury[century].map(function (person) {
+                return person.died - person.born;
+            });
+            console.log(century + ": " + average(ages));
+        }
+
+
+
+        //////////////////////EVERY && SOME//////////////////////////////////
+        /////////--------- MY SOLUTION ---------------- //////////////////
+        // function every(array, callback) {
+        //     var valueFlag = true;
+        //     for (var i = 0; i < array.length; i++) {
+        //         if (callback(array[i])) {
+        //             valueFlag = true;
+        //         } else {
+        //             valueFlag = false;
+        //             break;
+        //         }
+        //     }
+
+        //     return valueFlag;
+        // }
+        //------------------------------------------------------//
+
+        function every(array, predicate){
+            for(var i = 0; i<array.length; i++){
+                if(!predicate(array[i]))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        console.log(every([NaN, NaN, NaN], isNaN));
+        console.log(every([NaN, NaN, 4], isNaN));
+        console.log(every([NaN, 3, 4], isNaN));
+        console.log(every([2, 3, 4], isNaN));
+        console.log(every([1, NaN, 4], isNaN));
+        console.log(every([1, NaN, NaN], isNaN));
+
+
+        /////////--------- MY SOLUTION ---------------- //////////////////
+        // function some(array, callback) {
+        //     var valueFlag = true;
+        //     for (var i = 0; i < array.length; i++) {
+        //         if (callback(array[i])) {
+        //             valueFlag = true;
+        //             break;
+        //         } else {
+        //             valueFlag = false;
+        //         }
+        //     }
+
+        //     return valueFlag;
+        // }
+        //------------------------------------------------------//
+
+        function some(array, predicate){
+            for(var i = 0; i<array.length; i++){
+                if(predicate(array[i])){
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        console.log("SOME");
+        console.log(some([NaN, 3, 4], isNaN));
+        console.log(some([2, 3, 4], isNaN));
+        console.log(some([4, NaN, 4], isNaN));
+        console.log(some([2, 3, NaN], isNaN));
+        console.log(some([NaN, NaN, NaN], isNaN));
+    </script>
+</body>
+
+</html>

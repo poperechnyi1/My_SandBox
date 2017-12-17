@@ -1,0 +1,242 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function greaterThan(n) {
+            return function (m) {
+                return m > n
+            };
+        }
+
+        var greateThan10 = greaterThan(10);
+        console.log(greateThan10(11));
+
+        function noisy(f) {
+            return function (arg) {
+                console.log("calling with", arg);
+                var val = f(arg);
+                console.log("called with", arg, "- got", val);
+                return val;
+            }
+        }
+
+        noisy(Boolean)(0);
+
+        //////////////////////////////////////////
+
+        function unless(test, then) {
+            if (!test) then();
+        }
+
+        function repeat(times, body) {
+            for (var i = 0; i < times; i++) body(i);
+        }
+
+        repeat(6, function (n) {
+            unless(n % 2, function () {
+                console.log(n, "is even");
+            })
+        })
+
+        console.log("Object as array");
+
+        var a = {};
+
+        var i = 0;
+        while (i < 10) {
+            a[i] = i * i;
+            i++;
+        }
+        a.length = i;
+        console.log(a);
+
+        function sumDigPow(a, b) {
+            // Your code here
+            var resultArray = [];
+
+            for (var i = a; i < b; i++) {
+                if (i < 10) {
+                    resultArray.push(i);
+                } else {
+                    var count = 1;
+                    var stringNumb = i.toString();
+                    var splitString = stringNumb.split("");
+                    var elementInPow = splitString.map(
+                        function (element) {
+                            count++
+                            return Math.pow(element, count - 1);
+                        }
+                    );
+
+                    var sumElement = elementInPow.reduce(function (a, b) {
+                        return a + b;
+                    });
+
+                    if (sumElement == i && sumElement <= b) {
+                        resultArray.push(sumElement);
+                    }
+                }
+            }
+
+            return resultArray;
+        }
+
+        console.log(sumDigPow(1, 100));
+
+        console.log("USE THIS");
+
+        var o = {
+            m: function () {
+                var slef = this;
+                console.log(this === o);
+                f();
+
+                function f() {
+                    console.log(this === o);
+                    console.log(self === o);
+                }
+            }
+        };
+        o.m();
+
+        function f(x) {
+            console.log(x);
+            arguments[0] = null;
+            console.log(x);
+        }
+
+        f("MOM");
+
+        var factorial = function (x) {
+            if (x <= 1) {
+                return 1;
+            }
+            return x * arguments.callee(x - 1);
+        }
+
+        factorial(10);
+
+        function functionFactorial(n) {
+            if (isFinite(n) && n > 0 && n == Math.round(n)) {
+                if (!(n in functionFactorial)) {
+                    functionFactorial[n] = n * functionFactorial(n - 1);
+                }
+                return functionFactorial[n];
+            } else return NaN;
+        }
+
+        console.log(functionFactorial[1] = 5);
+
+
+
+        function countSmileys(arr) {
+            var count = 0;
+            arr.forEach(function (element) {
+                if (element.length === 3) {
+                    if (element[0] == ":" || element[0] == ";") {
+                        if (element[1] == "" || element[1] == "-" || element[1] == "~") {
+                            if (element[2] == ")" || element[2] == "D") {
+                                count++;
+                            }
+                        }
+
+                    }
+                } else if (element.length < 3) {
+                    if (element[0] == ":" || element[0] == ";") {
+                        if (element[1] == ")" || element[1] == "D") {
+                            count++;
+                        }
+                    }
+                }
+
+            })
+
+
+            return count;
+        }
+
+        console.log(countSmileys([':D', ':~)', ';~D', ':)']));
+
+
+        var empty = {};
+        console.log(empty.toString);
+        console.log(empty.toString());
+
+        console.log(Object.getPrototypeOf({}) == Object.prototype);
+        console.log(Object.getPrototypeOf(Object.prototype));
+
+        console.log(Object.getPrototypeOf(isNaN) == Function.prototype);
+        console.log(Object.getPrototypeOf([]) == Array.prototype);
+
+
+        Array.prototype.square = function () {
+            return this.map(
+                function (element) {
+                    return Math.pow(element, 2);
+                }
+            )
+        }
+        Array.prototype.cube = function () {
+            return this.map(function (n) {
+                return n * n * n;
+            });
+        }
+        Array.prototype.average = function () {
+            return this.sum() / this.length;
+        }
+
+        var numbers = [1, 2, 3, 4, 5];
+        console.log(numbers.square());
+
+
+        function accum(s) {
+            // your code
+            var array = [];
+            array = s.split("");
+            var newArr = []
+            for (var i = 0; i <= array.length; i++) {
+                var arrayTime = [];
+                for (var j = 0; j <= i; j++) {
+                    arrayTime.push(array[i]);
+                }
+                newArr.push(arrayTime.join(""));
+
+            }
+
+            var upperCase =[];
+            var endArray = [];
+
+             newArr.map(function(element){
+                for(var i = 0; i<element.length; i++){
+                    if(i == 0){
+                        upperCase.push(element.charAt(i).toUpperCase());
+                    }
+                }
+            });
+
+            for(var i = 0; i<upperCase.length; i++){
+                if(i==0){
+                    endArray.push(upperCase[i]);
+                } else {
+                    endArray.push(upperCase[i] + newArr[i].toLowerCase().substring(0, newArr[i].length - 1));
+                }
+                
+            }
+
+            
+
+            return endArray;
+        }
+
+        console.log(accum("ZpglnRxqenU"));
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Objects</title>
+</head>
+<body>
+    <script>
+        var protoRabbit = {
+            speak: function(line){
+                console.log("A " + this.type + " кролик говорит " + line);
+            }
+        };
+
+        var killerRabbit = Object.create(protoRabbit);
+        killerRabbit.type = "убийственный";
+        killerRabbit.speak("ХРЯЯЯСЬ!");
+
+
+        function Rabbit (type){
+            this.type = type;
+        }
+
+        var killerRabbit = new Rabbit("убийственный");
+        var blackRabbit = new Rabbit("чёрный");
+
+        Rabbit.prototype.speak = function(line){
+            console.log("A " + this.type + " кролик говорит " + line);
+        }
+
+        console.log(blackRabbit.type);
+        blackRabbit.speak("Всем капец...")
+    </script>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        console.log("SUM and RANGE");
+
+        function range(a, b, step) {
+            var arrayNumb = [];
+            var sircleStep;
+            if (!step) {
+                sircleStep = 1;
+                for (var i = a; i <= b; i += sircleStep) {
+                    arrayNumb.push(i);
+                }
+            } else if (step > 0) {
+                sircleStep = step;
+                for (var i = a; i <= b; i += sircleStep) {
+                    arrayNumb.push(i);
+                }
+            } else if (step < 0) {
+                sircleStep = step
+                for (var i = b; i >= a; i += sircleStep) {
+                    arrayNumb.push(i);
+                }
+            }
+
+            return arrayNumb;
+        }
+
+        console.log(range(1, 10, -2));
+
+        function sum(array) {
+            var summa = 0;
+            array.forEach(function (element) {
+                summa += element;
+            });
+            return summa;
+        }
+
+        console.log(sum(range(1, 10)));
+
+        console.log("REVERSE ARRAY");
+
+        function reverseArray(array) {
+            var arrayReverse = [];
+            for (var i = array.length - 1; i >= 0; i--) {
+                arrayReverse.push(array[i]);
+            }
+            return arrayReverse;
+        }
+
+        console.log(reverseArray(["C", "B", "A"]));
+
+        var arrayValue = [1, 2, 3, 4, 5];
+
+        function reverseArrayInPlace(array) {
+
+            for (var i = 0; i < Math.floor(array.length / 2); i++) {
+                var currentElem = array[i];
+                array[i] = array[array.length - 1 - i];
+                array[array.length - 1 - i] = currentElem;
+            }
+
+            return array;
+        }
+
+        reverseArrayInPlace(arrayValue);
+        console.log(arrayValue);
+        console.log("LIST");
+
+        // function arrayToList(array) {
+        //     //It is my SOLUTION
+        //     // var list = {};
+        //     // for (var i = array.length - 1; i >= 0; i--) {
+
+        //     //     var arrayList = {
+        //     //         value: array[i],
+        //     //         rest: list
+        //     //     }
+        //     //     if (i == array.length - 1) {
+        //     //         arrayList.rest = null;
+        //     //         list = arrayList;
+        //     //     } else {
+        //     //         list = arrayList;
+        //     //     }
+
+
+        //     // }
+        //     // return list;
+        //     var list = null;
+        //     for (var i = array.length - 1; i >= 0; i--) {
+        //         list = {
+        //             value: array[i],
+        //             rest: list
+        //         };
+        //     }
+        //     return list;
+        // }
+
+        // console.log(arrayToList([10, 20]));
+
+        // function listToArray(objects) {
+        //     var resultArray = [];
+        //     for (var node = objects; node; node = node.rest) {
+        //         resultArray.push(node.value);
+        //     }
+        //     return resultArray;
+        // }
+        // console.log(listToArray(arrayToList([10, 20, 30, 40])));
+
+        // function prepend(elementObj, elementObj2) {
+        //     return {
+        //         value: elementObj,
+        //         rest: elementObj2
+        //     };
+        // }
+
+        // console.log(prepend(10, prepend(20, null)));
+
+        // function nth(list, position) {
+        //     //My solution
+        //     // var array = listToArray(list);
+        //     // var value = array[position] ;
+        //     // if(value){
+        //     //     value = array[position];               
+        //     // } else {
+        //     //    value = "undefined";
+        //     // }
+
+        //     // return value;
+
+        //     if(!list)
+        //         return undefined;
+        //     else if(position == 0)
+        //         return list.value;
+        //     else
+        //         return nth(list.rest, position-1);
+          
+        // }
+
+        // console.log(nth(arrayToList([10, 20, 30, 40]), 1));
+
+        function arrayToList(array){
+            var list = null
+            for(var i = array.length-1; i>=0; i--){
+                list = {value: array[i], rest:list}
+            }
+            return list;
+        }
+
+        console.log(arrayToList([10,20,30]));
+
+        function listToArray(objectList){
+            var list = [];
+            for(var node = objectList; node; node= node.rest){
+                list.push(node.value);
+            }
+            return list;
+        }
+        console.log(listToArray(arrayToList([10, 20, 30, 40])));
+
+        function prepend (argument1, argument2){
+            return {value: argument1, rest:argument2}
+        }
+
+        console.log(prepend(10, prepend(20,null)));
+
+        function nth(list, position){
+            if(!list){
+                return "undefined";
+            } else if(position == 0){
+                return list.value;
+            } else {
+                return nth(list.rest, position - 1);
+            }
+        }
+
+        console.log(nth(arrayToList([10, 20, 30, 40]), 1));
+
+        console.log("Deep Equal");
+
+        function deepEqual(a,b){
+            // my solution
+            // if(value1 === value2)
+            // {
+            //     return true;
+            // } else if(value1 === "null" || value2 === "null") {
+            //         return false;
+            // } else if(typeof value1.here === typeof value2.here && value1.here.is === value2.here.is){
+            //     if(typeof value1.object === typeof value2.object && value1.object === value2.object){
+            //         return true;
+            //     }
+            //     return false;
+            // } else {
+            //     return false;
+            // }
+
+            if(a === b) return true;
+
+            if(a == null || typeof a != "object" || b == null || typeof b != "object"){
+                return false;
+            }
+
+            var propsInA = 0, propsInB = 0;
+
+            for(var prop in a){
+                propsInA += 1;
+            }
+
+            for (var prop in b){
+                propsInB += 1;
+                if(!(prop in a) || !deepEqual(a[prop], b[prop]))
+                {
+                    return false;
+                }
+            }
+
+            return propsInA == propsInB;
+
+        }
+
+        var obj = {here: {is: "an"}, object:2};
+
+        console.log(deepEqual(obj,obj));
+        console.log(deepEqual(obj,{here: 1, object: 2}));
+        console.log(deepEqual(obj,{here: {is: "an"}, object:2}))
+        
+    </script>
+</body>
+
+</html>
