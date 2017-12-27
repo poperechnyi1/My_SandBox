@@ -42,6 +42,22 @@
         }
 
         blackRabbit.speak("everyone will die");
+
+        Rabbit.prototype.dance = function(){
+            console.log("A " + this.type + " кролик танцует джигу.");
+        }
+
+        killerRabbit.dance();
+
+        // create object without prototype
+        console.log();
+        var map = Object.create(null);
+        map["pizza"] = 0.069;
+        console.log("toString" in map);
+        console.log("pizza" in map);
+
+
+        
     </script>
 </body>
 </html>
