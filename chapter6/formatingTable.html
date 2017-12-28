@@ -22,6 +22,17 @@
                 })
             })
         }
+
+        function drawTable(rows){
+            var heights = rowHeights(row);
+            var widths = colWidths(row);
+
+            function drawLine(blocks, lineNo){
+                return blocks.map(function(block){
+                    return block[lineNo];
+                }).join(" ");
+            }
+        }
     </script>
 </body>
 </html>
