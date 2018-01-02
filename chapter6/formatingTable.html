@@ -126,6 +126,26 @@
             }
         ];
 
+        function UnderlinedCell(inner) {
+            this.inner = inner;
+        }
+
+        UnderlinedCell.prototype.minWidth = function(){
+            return this.inner.minWidth();
+        }
+
+        UnderlinedCell.prototype.minHeight = function(){
+            return this.inner.minHeight() + 1;
+        }
+
+        UnderlinedCell.prototype.draw = function(widht, height){
+            return this.inner.draw(width, height - 1).concat([repeat("-", width)]);
+        }
+
+
+
+
+
         console.log(drawTable(rows));
     </script>
 </body>
