@@ -160,9 +160,17 @@
             return [headers].concat(body);
         }
 
+        Object.defineProperty(TextCell.prototype, "heightProp", {
+            get: function(){
+                return this.text.length;
+            }
+        });
 
+        var cell = new TextCell("да\nну");
+        console.log(cell.heightProp);
 
-
+        cell.heightProp = 100;
+        console.log(cell.heightProp);
 
         console.log(drawTable(rows));
 
