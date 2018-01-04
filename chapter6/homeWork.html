@@ -16,6 +16,13 @@
             return new Vector(this.x + obj.x, this.y + obj.y);
         }
         console.log(new Vector(1,2).plus(new Vector(2,3)));
+
+        Vector.prototype.minus = function(obj){
+            return new Vector(this.x - obj.x, this.y - obj.y);
+        }
+
+        console.log(new Vector(1,2).minus(new Vector(2,3)));
+
     </script>
 </body>
 </html>
