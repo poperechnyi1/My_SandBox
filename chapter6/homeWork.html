@@ -1,28 +1,36 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
     <script>
-        function Vector(x,y){
+        function Vector(x, y) {
             this.x = x,
             this.y = y
         }
 
-        Vector.prototype.plus = function(obj){
+        Vector.prototype.plus = function (obj) {
             return new Vector(this.x + obj.x, this.y + obj.y);
         }
-        console.log(new Vector(1,2).plus(new Vector(2,3)));
+        console.log(new Vector(1, 2).plus(new Vector(2, 3)));
 
-        Vector.prototype.minus = function(obj){
+        Vector.prototype.minus = function (obj) {
             return new Vector(this.x - obj.x, this.y - obj.y);
         }
+        console.log(new Vector(1, 2).minus(new Vector(2, 3)));
 
-        console.log(new Vector(1,2).minus(new Vector(2,3)));
-
+        Object.defineProperty(Vector.prototype, "length", {
+            get: function () {
+                return Math.sqrt(Math.pow(this.x,2) + Math.pow(this.y,2));
+            }
+        })
+        console.log(new Vector(3, 4).length);
     </script>
 </body>
+
 </html>
