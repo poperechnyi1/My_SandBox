@@ -1,0 +1,21 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Vector(x,y){
+            this.x = x,
+            this.y = y
+        }
+
+        Vector.prototype.plus = function(obj){
+            return new Vector(this.x + obj.x, this.y + obj.y);
+        }
+        console.log(new Vector(1,2).plus(new Vector(2,3)));
+    </script>
+</body>
+</html>
