@@ -11,23 +11,32 @@
     <script>
         function GoSequence(obj) {
             this.obj = obj,
-            this.inputArray = obj.input,
-            this.fromRange = obj.from,
-            this.toRange = obj.to,
-            this.iterableForLogFileSequnce = function (start, until) {
+                this.inputArray = obj.input,
+                this.fromRange = obj.from,
+                this.toRange = obj.to,
+                this.iterableForLogFileSequnce = function (start, until) {
                     if (this.obj instanceof ArraySeq) {
                         console.log('work')
                         for (var i = start; i < until; i++) {
                             console.log(this.inputArray[i]);
                         }
-                    } 
-                    
-                    if(this.obj instanceof RangeSeq) {
+                    }
+
+                    if (this.obj instanceof RangeSeq) {
                         for (var i = start; i < until; i++) {
                             console.log(i);
                         };
                     }
+                },
+                this.iterableSequnce = function () {
+                    if (this.obj instanceof ArraySeq) {
+                        console.log('iterableSequnce to ArraySeq')
+                        for (var i = 0; i < this.inputArray.length; i++) {
+                            console.log(this.inputArray[i]);
+                        }
+                    }
                 }
+
         }
 
         GoSequence.prototype.logFive = function () {
@@ -53,6 +62,7 @@
 
         var callArraySequence = new GoSequence(new ArraySeq([1, 2, 3, 4, 5, 6, 7, 8, 9]));
         callArraySequence.logFive();
+        callArraySequence.iterableSequnce();
 
         function RangeSeq(from, to) {
             this.from = from,
