@@ -12,6 +12,8 @@
         function GoSequence(obj) {
             this.obj = obj,
             this.inputArray = obj.input,
+            this.fromRange = obj.from,
+            this.toRange = obj.to,
             this.iterableSequnce = function(start, until){
                 for (var i = start; i < until; i++) {
                     console.log(this.inputArray[i]);
@@ -27,7 +29,7 @@
             }
 
             if(this.obj instanceof RangeSeq){
-
+                this.iterableSequnce(this.fromRange, this.toRange);
             }
 
             // console.log(this.obj instanceof ArraySeq);
@@ -41,8 +43,8 @@
         callArraySequence.logFive();
 
         function RangeSeq(from, to){
-            this.from = fromRange,
-            this.to = toRange
+            this.from = from,
+            this.to = to
         }
     </script>
 </body>
