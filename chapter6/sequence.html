@@ -35,6 +35,12 @@
                             console.log(this.inputArray[i]);
                         }
                     }
+                    if (this.obj instanceof RangeSeq) {
+                        console.log('iterableSequnce to RangeSeq')
+                        for (var i = this.fromRange; i <= this.toRange; i++) {
+                            console.log(i);
+                        }
+                    }
                 }
 
         }
@@ -71,6 +77,7 @@
 
         var callRangeSequence = new GoSequence(new RangeSeq(100, 1000));
         callRangeSequence.logFive();
+        callRangeSequence.iterableSequnce();
     </script>
 </body>
 
