@@ -1,38 +1,43 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
     <script>
-        function goSequence(from,to){
-            this.from = from;
-            this.to = to;
+        function GoSequence(input) {
+            this.input = input;
         }
 
-        goSequence.prototype.logFive = function(){
-            for(var i = this.from; i <= this.to; i++){
-                console.log(i);
+        GoSequence.prototype.logFive = function () {
+            if (Array.isArray(this.input)) {
+                for (var i = 0; i < this.input.length; i++) {
+                    console.log(this.input[i]);
+                }
             }
         }
 
-        function ArraySeq (arrayInput){
-            this.arrayInput = arrayInput;
-            var start = this.arrayInput[0];
-            var last = this.arrayInput[0] - 1;
-            return [start];
-        }
+    
+         var callArraySequence = new GoSequence([1,2]);
+         callArraySequence.logFive();
+        // function ArraySeq (arrayInput){
+        //     this.arrayInput = arrayInput;
+        //     var start = this.arrayInput[0];
+        //     var last = this.arrayInput[0] - 1;
+        //     return [start];
+        // }
 
-        var callSequence = new goSequence(0,3);
-        var callArraySequence = new goSequence(new ArraySeq([1,2]));
+        // var callSequence = new goSequence(0,3);
+        // var callArraySequence = new goSequence(new ArraySeq([1,2]));
 
-        console.log(new ArraySeq([1,2]));
-        callSequence.logFive();
-        callArraySequence.logFive();
-
-        
+        // console.log(new ArraySeq([1,2]));
+        // callSequence.logFive();
+        // callArraySequence.logFive();
     </script>
 </body>
+
 </html>
