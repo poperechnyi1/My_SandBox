@@ -18,9 +18,19 @@
             }
         }
 
+        function ArraySeq (arrayInput){
+            this.arrayInput = arrayInput;
+            var start = this.arrayInput[0];
+            var last = this.arrayInput[0] - 1;
+            return [start];
+        }
+
         var callSequence = new goSequence(0,3);
-        
+        var callArraySequence = new goSequence(new ArraySeq([1,2]));
+
+        console.log(new ArraySeq([1,2]));
         callSequence.logFive();
+        callArraySequence.logFive();
 
         
     </script>
