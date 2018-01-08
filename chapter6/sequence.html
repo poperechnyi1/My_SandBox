@@ -9,27 +9,34 @@
 
 <body>
     <script>
-        function GoSequence(input) {
-            this.input = input;
-        }
-
-        GoSequence.prototype.logFive = function () {
-            if (Array.isArray(this.input)) {
-                for (var i = 0; i < this.input.length; i++) {
-                    console.log(this.input[i]);
+        function GoSequence(obj) {
+            this.obj = obj;
+            this.inputArray = obj.input;
+            this.iterableSequnce = function(start, until){
+                for (var i = start; i < until; i++) {
+                    console.log(this.inputArray[i]);
                 }
             }
         }
 
+        GoSequence.prototype.logFive = function () {
+            if ( this.obj instanceof ArraySeq) {
+                this.iterableSequnce(0, this.inputArray.length);
+            }
+
+            console.log(this.obj instanceof ArraySeq);
+        }
+
     
-         var callArraySequence = new GoSequence([1,2]);
+         var callArraySequence = new GoSequence(new ArraySeq ([1,2,3,4,5,6,7,8,9]));
          callArraySequence.logFive();
-        // function ArraySeq (arrayInput){
-        //     this.arrayInput = arrayInput;
-        //     var start = this.arrayInput[0];
-        //     var last = this.arrayInput[0] - 1;
-        //     return [start];
-        // }
+        
+        function ArraySeq(input){
+            this.input = input;
+            
+        }
+
+        // console.log(new ArraySeq ([1,2,3,4,5,6,7,8,9]) instanceof ArraySeq);
 
         // var callSequence = new goSequence(0,3);
         // var callArraySequence = new goSequence(new ArraySeq([1,2]));
