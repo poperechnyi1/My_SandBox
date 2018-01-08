@@ -14,38 +14,53 @@
             this.inputArray = obj.input,
             this.fromRange = obj.from,
             this.toRange = obj.to,
-            this.iterableSequnce = function(start, until){
-                for (var i = start; i < until; i++) {
-                    console.log(this.inputArray[i]);
+            this.iterableSequnce = function (start, until) {
+                    if (this.obj instanceof ArraySeq) {
+                        console.log('work')
+                        for (var i = start; i < until; i++) {
+                            console.log(this.inputArray[i]);
+                        }
+                    } 
+                    
+                    if(this.obj instanceof RangeSeq) {
+                        for (var i = start; i < until; i++) {
+                            console.log(i);
+                        };
+                    }
                 }
-            }
         }
 
         GoSequence.prototype.logFive = function () {
-            if (this.inputArray.length < 6 && this.obj instanceof ArraySeq) {
+            if (Array.isArray(this.inputArray) && this.inputArray.length < 6 && this.obj instanceof ArraySeq) {
+                console.log('ArraySeq');
                 this.iterableSequnce(0, this.inputArray.length);
-            } else if(this.obj instanceof ArraySeq) {
+            } else if (this.obj instanceof ArraySeq) {
+                console.log('ArraySeq');
                 this.iterableSequnce(0, 5);
             }
 
-            if(this.obj instanceof RangeSeq){
-                this.iterableSequnce(this.fromRange, this.toRange);
-            }
+            if (this.obj instanceof RangeSeq) {
+                console.log('RangeSeq');
+                this.iterableSequnce(this.fromRange, this.fromRange + 5)
 
+            }
             // console.log(this.obj instanceof ArraySeq);
         }
 
-        function ArraySeq(input){
+        function ArraySeq(input) {
             this.input = input;
         }
-    
-        var callArraySequence = new GoSequence(new ArraySeq ([1,2,3,4,5,6,7,8,9]));
+
+        var callArraySequence = new GoSequence(new ArraySeq([1, 2, 3, 4, 5, 6, 7, 8, 9]));
         callArraySequence.logFive();
 
-        function RangeSeq(from, to){
+        function RangeSeq(from, to) {
             this.from = from,
-            this.to = to
+                this.to = to
         }
+
+        var callRangeSequence = new GoSequence(new RangeSeq(100, 1000));
+        callRangeSequence.logFive();
     </script>
 </body>
 
