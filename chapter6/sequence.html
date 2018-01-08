@@ -14,7 +14,7 @@
             this.inputArray = obj.input,
             this.fromRange = obj.from,
             this.toRange = obj.to,
-            this.iterableSequnce = function (start, until) {
+            this.iterableForLogFileSequnce = function (start, until) {
                     if (this.obj instanceof ArraySeq) {
                         console.log('work')
                         for (var i = start; i < until; i++) {
@@ -33,15 +33,15 @@
         GoSequence.prototype.logFive = function () {
             if (Array.isArray(this.inputArray) && this.inputArray.length < 6 && this.obj instanceof ArraySeq) {
                 console.log('ArraySeq');
-                this.iterableSequnce(0, this.inputArray.length);
+                this.iterableForLogFileSequnce(0, this.inputArray.length);
             } else if (this.obj instanceof ArraySeq) {
                 console.log('ArraySeq');
-                this.iterableSequnce(0, 5);
+                this.iterableForLogFileSequnce(0, 5);
             }
 
             if (this.obj instanceof RangeSeq) {
                 console.log('RangeSeq');
-                this.iterableSequnce(this.fromRange, this.fromRange + 5)
+                this.iterableForLogFileSequnce(this.fromRange, this.fromRange + 5)
 
             }
             // console.log(this.obj instanceof ArraySeq);
