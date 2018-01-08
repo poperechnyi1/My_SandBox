@@ -10,8 +10,8 @@
 <body>
     <script>
         function GoSequence(obj) {
-            this.obj = obj;
-            this.inputArray = obj.input;
+            this.obj = obj,
+            this.inputArray = obj.input,
             this.iterableSequnce = function(start, until){
                 for (var i = start; i < until; i++) {
                     console.log(this.inputArray[i]);
@@ -26,25 +26,24 @@
                 this.iterableSequnce(0, 5);
             }
 
-            console.log(this.obj instanceof ArraySeq);
+            if(this.obj instanceof RangeSeq){
+
+            }
+
+            // console.log(this.obj instanceof ArraySeq);
         }
 
-    
-         var callArraySequence = new GoSequence(new ArraySeq ([1,2,3,4,5,6,7,8,9]));
-         callArraySequence.logFive();
-        
         function ArraySeq(input){
             this.input = input;
         }
+    
+        var callArraySequence = new GoSequence(new ArraySeq ([1,2,3,4,5,6,7,8,9]));
+        callArraySequence.logFive();
 
-        // console.log(new ArraySeq ([1,2,3,4,5,6,7,8,9]) instanceof ArraySeq);
-
-        // var callSequence = new goSequence(0,3);
-        // var callArraySequence = new goSequence(new ArraySeq([1,2]));
-
-        // console.log(new ArraySeq([1,2]));
-        // callSequence.logFive();
-        // callArraySequence.logFive();
+        function RangeSeq(from, to){
+            this.from = fromRange,
+            this.to = toRange
+        }
     </script>
 </body>
 
