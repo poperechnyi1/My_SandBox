@@ -43,10 +43,6 @@
 
       grid.set(new Vector(1,1), "X");
       console.log(grid.get(new Vector(1,1)));
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 09b016322f339a27ca6e12b54700dfa557177be8
 
       var directions = {
         "n": new Vector(0,-1),
@@ -113,6 +109,9 @@
       }
 
       function Wall() {}
+
+      var world = new World(plan, {"#": Wall, "o": BouncingCritter});
+      console.log(world.toString());
     </script>
   </body>
 </html>
