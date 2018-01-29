@@ -6,6 +6,20 @@
   </head>
   <body>
     <script type="text/javascript">
+
+    var plan = ["############################",
+            "#      #    #      o      ##",
+            "#                          #",
+            "#          #####           #",
+            "##         #   #    ##     #",
+            "###           ##     #     #",
+            "#           ###      #     #",
+            "#   ####                   #",
+            "#   ##       o             #",
+            "# o  #         o       ### #",
+            "#    #                     #",
+            "############################"];
+
       function Vector(x, y){
         this.x = x;
         this.y = y;
@@ -96,19 +110,20 @@
           return element.originChar;
       }
 
-      World.prototype.toStrign = function(){
+      World.prototype.toString = function() {
         var output = "";
-        for (var y = 0; y < this.grid.height; y++){
-          for (var x = 0; x < this.grid.width; x++){
+        for (var y = 0; y < this.grid.height; y++) {
+          for (var x = 0; x < this.grid.width; x++) {
             var element = this.grid.get(new Vector(x, y));
             output += charFromElement(element);
           }
           output += "\n";
         }
         return output;
-      }
+      };
 
       function Wall() {}
+
 
       var world = new World(plan, {"#": Wall, "o": BouncingCritter});
       console.log(world.toString());
