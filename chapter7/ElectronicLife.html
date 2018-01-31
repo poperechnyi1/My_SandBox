@@ -127,6 +127,16 @@
 
       var world = new World(plan, {"#": Wall, "o": BouncingCritter});
       console.log(world.toString());
+
+      var test = {
+        prop: 10,
+        addPropTo: function(array){
+          return array.map(function(elt){
+            return this.prop + elt;
+          }.bind(this));
+        }
+      };
+      console.log(test.addPropTo([5]));
     </script>
   </body>
 </html>
