@@ -25,7 +25,7 @@
         this.y = y;
       }
 
-      Vector.prototype.plus = function(){
+      Vector.prototype.plus = function(other){
         return new Vector(this.x + other.x, this.y + other.y);
       }
 
@@ -181,7 +181,7 @@
       };
 
       World.prototype.checkDestination = function(action, vector){
-        if(directions.hesOwnProperty(action.direction)){
+        if(directions.hasOwnProperty(action.direction)){
           var dest = vector.plus(directions[action.direction]);
           if(this.grid.isInside(dest))
             return dest;
@@ -194,7 +194,7 @@
       }
 
       View.prototype.look = function(dir){
-        var target = this.vector.plus(direction[dir]);
+        var target = this.vector.plus(directions[dir]);
         if(this.world.grid.isInside(target))
           return charFromElement(this.world.grid.get(target));
         else
@@ -213,6 +213,11 @@
         var found = this.findAll(ch);
         if(found.length == 0) return null;
         return randomElement(found);
+      }
+
+      for(var i =0; i <5; i++){
+        world.turn();
+        console.log(world.toString());
       }
     </script>
   </body>
