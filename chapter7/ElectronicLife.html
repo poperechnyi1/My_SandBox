@@ -245,7 +245,21 @@
         return {type: "move", direction: this.dir};
       };
 
-      
+      animateWorld(new World(
+        [
+          "############",
+          "#     #    #",
+          "#  ~      ~#",
+          "# ##   o####",
+          "#          #",
+          "############"
+        ],
+        {
+        "#": Wall,
+        "~": WallFollower,
+        "o": BouncingCritter
+        }
+      ))
     </script>
   </body>
 </html>
