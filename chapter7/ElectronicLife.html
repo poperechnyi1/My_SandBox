@@ -372,6 +372,34 @@
         };
     };
 
+    function SmartPlantEater() {
+      this.energy = 30;
+      this.direction = 'e';
+    }
+
+    SmartPlantEater.prototype.act = function (contex) {
+      var space = contex.find(" ");
+      if (this.energy > 90 && space)
+        return {
+          type: "reproduce",
+          direction: space
+        };
+      var plant = contex.findAll("*");
+      if (plant.length > 1)
+        return {
+          type: "eat",
+          direction: randomElement(plant)
+        };
+      if (space && contex.look(this.direction) != ' ')
+        this.direction = space;
+
+        return {
+          type: "move",
+          direction: this.direction
+        };
+
+    }
+
     var valley = new LifelikeWorld(
       ["############################",
         "#####                 ######",
@@ -387,12 +415,12 @@
         "############################"
       ], {
         "#": Wall,
-        "O": PlantEater,
+        "O": SmartPlantEater,
         "*": Plant
       }
     );
 
-     animateWorld(valley);
+    animateWorld(valley);
   </script>
 </body>
 
