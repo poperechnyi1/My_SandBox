@@ -397,7 +397,6 @@
           type: "move",
           direction: this.direction
         };
-
     }
 
     // var valley = new LifelikeWorld(
@@ -425,9 +424,32 @@
 
     // Your code here
   function Tiger() {
-    this.energy = 30;
+    this.energy = 50;
+    this.direction = 'n';
   }
-  
+
+  Tiger.prototype.act = function(context){
+    var space = context.find(" ");
+      if (this.energy > 110 && space)
+        return {
+          type: "reproduce",
+          direction: space
+        };
+      var palntEater = context.find("O");
+      if (palntEater)
+        return {
+          type: "eat",
+          direction: palntEater
+        };
+      if (space && context.look(this.direction) != ' ')
+        this.direction = space;
+
+        return {
+          type: "move",
+          direction: this.direction
+        };
+  }
+
 
 
 
