@@ -379,7 +379,7 @@
 
     SmartPlantEater.prototype.act = function (contex) {
       var space = contex.find(" ");
-      if (this.energy > 90 && space)
+      if (this.energy > 70 && space)
         return {
           type: "reproduce",
           direction: space
@@ -397,6 +397,7 @@
           type: "move",
           direction: this.direction
         };
+
     }
 
     // var valley = new LifelikeWorld(
@@ -424,13 +425,15 @@
 
     // Your code here
   function Tiger() {
-    this.energy = 50;
+    this.energy = 30;
     this.direction = 'n';
+
   }
+
 
   Tiger.prototype.act = function(context){
     var space = context.find(" ");
-      if (this.energy > 110 && space)
+      if (this.energy > 95 && space)
         return {
           type: "reproduce",
           direction: space
@@ -449,8 +452,6 @@
           direction: this.direction
         };
   }
-
-
 
 
 animateWorld(new LifelikeWorld(
