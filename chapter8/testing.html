@@ -43,12 +43,20 @@
             do {
                 console.log(n);
                 result = String(n % base) + result;
-                n = Math.floor(n /base);
+                n = Math.floor(n / base);
             } while (n > 0);
 
             return sign + result;
         }
         console.log(numberToString(13, 10));
+
+        function promptNumber(question) {
+            var result = Number(prompt(question, ""));
+            if (isNaN(result)) return null;
+            else return result;
+        }
+
+        console.log(promptNumber("How old are you?"));
     </script>
 </body>
 
