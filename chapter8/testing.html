@@ -13,9 +13,25 @@
             this.x = x;
             this.y = y;
         }
+
         Vector.prototype.plus = function (other) {
             return new Vector(this.x + other.x, this.y + other.y);
         };
+
+        function testVector() {
+            var p1 = new Vector(10, 20);
+            var p2 = new Vector(-10, 5);
+            var p3 = p1.plus(p2);
+
+            if(p1.x !== 10) return "error: value x unexpected";
+            if(p1.y !== 20) return "error: value y unexpected";
+            if(p2.x !== -10) return "error: value x unexpected";
+            if(p3.x !== 0) return "error: result after addition of x unexpected";
+            if(p3.y !== 25) return "error: result after addition of y unexpected";
+            return "all right";
+        }
+
+        console.log(testVector());
     </script>
 </body>
 
