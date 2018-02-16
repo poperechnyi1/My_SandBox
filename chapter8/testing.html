@@ -23,18 +23,19 @@
             var p2 = new Vector(-10, 5);
             var p3 = p1.plus(p2);
 
-            if(p1.x !== 10) return "error: value x unexpected";
-            if(p1.y !== 20) return "error: value y unexpected";
-            if(p2.x !== -10) return "error: value x unexpected";
-            if(p3.x !== 0) return "error: result after addition of x unexpected";
-            if(p3.y !== 25) return "error: result after addition of y unexpected";
+            if (p1.x !== 10) return "error: value x unexpected";
+            if (p1.y !== 20) return "error: value y unexpected";
+            if (p2.x !== -10) return "error: value x unexpected";
+            if (p3.x !== 0) return "error: result after addition of x unexpected";
+            if (p3.y !== 25) return "error: result after addition of y unexpected";
             return "all right";
         };
 
         console.log(testVector());
 
         function numberToString(n, base) {
-            var result = "", sign = "";
+            var result = "",
+                sign = "";
             if (n < 0) {
                 sign = "-";
                 n = -n;
@@ -68,7 +69,7 @@
         function look() {
             if (promptDirection("Where?") == "L")
                 return "HOME";
-            else 
+            else
                 return "Two angry bears"
         };
 
@@ -77,6 +78,30 @@
         } catch (error) {
             console.log("Something wrong " + error);
         }
+
+
+        // var context = null;
+
+        function withContext(newContext, body) {
+            var oldContext = context;
+            context = newContext;
+            try {
+                return body();
+            } finally {
+                context = oldContext;
+            }
+        }
+
+        try {
+            withContext(5, function() {
+                if(context < 10)
+                    throw new Error("Контекст слишком мал!");
+            });
+        } catch (e) {
+            console.log(context);
+        }
+
+        console.log(context);
     </script>
 </body>
 
