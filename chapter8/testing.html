@@ -121,11 +121,14 @@
 
          for(;;) {
             try {
-                var dir = promtDirection("Куда?"); 
+                var dir = promptDirection("Куда?"); 
                 console.log("Выш выбор", dir);
                 break;
             } catch (e) {
-                console.log("Недопустимое направление. Попробуйте ещё раз.");
+                if (e instanceof InputError)
+                    console.log("Недопустимое направление. Попробуйте ещё раз.");
+                else
+                    throw e;
             }
         }
     </script>
