@@ -32,8 +32,6 @@
                 } catch (e) {
                     if (e instanceof MultiplicatorUnitFailure) {
                         console.log("Не перемножилось");
-                        return
-                    } else {
                         throw e;
                     }
                 }
