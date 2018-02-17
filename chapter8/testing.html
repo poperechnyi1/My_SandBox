@@ -131,6 +131,22 @@
                     throw e;
             }
         }
+
+        function AssertionFaild(message) {
+            this.message = message;
+        }
+
+        AssertionFaild.prototype = Object.create(Error.prototype);
+
+        function assert(test, message) {
+            if(!test)
+                throw new AssertionFaild(message);
+        }
+
+        function lastElement(array) {
+            assert(array.length > 0, "пустой массив в lastElement");
+            return array[array.length - 1];
+        }
     </script>
 </body>
 
