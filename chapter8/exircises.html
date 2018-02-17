@@ -1,11 +1,48 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
-    
+    <script>
+        function MultiplicatorUnitFailure() {}
+
+        MultiplicatorUnitFailure.prototype = Object.create(Error.prototype);
+        MultiplicatorUnitFailure.prototype.name = 'MultiplicatorUnitFailure';
+
+        function primitiveMultiply(a, b) {
+            if (Math.random() < 0.5)
+                return a * b;
+            else
+                throw new MultiplicatorUnitFailure();
+        }
+
+        function reliableMultiply(a, b) {
+            // Ваш код
+            var resultOfMultiplication;
+            for (;;) {
+                try {
+                    resultOfMultiplication = primitiveMultiply(a, b)
+                    return resultOfMultiplication;
+                    break;
+                } catch (e) {
+                    if (e instanceof MultiplicatorUnitFailure) {
+                        console.log("Не перемножилось");
+                        return
+                    } else {
+                        throw e;
+                    }
+                }
+            }
+        }
+
+        console.log(reliableMultiply(8, 8));
+        // → 64
+    </script>
 </body>
+
 </html>
