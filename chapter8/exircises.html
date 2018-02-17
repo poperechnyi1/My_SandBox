@@ -38,7 +38,7 @@
             }
         }
 
-        console.log(reliableMultiply(8, 8));
+        // console.log(reliableMultiply(8, 8));
         // → 64
 
 
@@ -59,7 +59,31 @@
             }
         };
 
-        
+        function withBoxUnlocked(body) {
+            try {
+                box.unlock();
+                body();
+                console.log(box.content); //call getter
+            } catch (e) {
+                console.log(e);
+            } finally {
+                box.lock();
+            }
+        }
+
+        withBoxUnlocked(function () {
+            box.content.push("золотишко");
+        });
+
+        try {
+            withBoxUnlocked(function () {
+                throw new Error("Пираты на горизонте! Отмена!");
+            });
+        } catch (e) {
+            console.log("Произошла ошибка:", e);
+        }
+        console.log(box.locked);
+        // → true
     </script>
 </body>
 
