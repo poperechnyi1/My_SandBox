@@ -65,13 +65,18 @@
         }
 
         console.log(findDate("30-01-2003"));
-        
+
         console.log(new Date(2003, 0, 30));
 
         var dateTime = /(\d{1,2})-(\d{1,2})-(\d{4})/;
         var match = dateTime.exec("30-01-2003");
         console.log(match);
         console.log(Number(match[2]) - 1);
+
+        console.log(/cat/.test("concatenate"));
+        console.log(/\bcat\b/.test("concatenate"));
+        console.log(/\bcat\b/.test("cat"));
+        console.log(/\bcat\b/.test("catsasascat"));
 
     </script>
 </body>
