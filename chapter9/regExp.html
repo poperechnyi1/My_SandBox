@@ -78,6 +78,12 @@
         console.log(/\bcat\b/.test("cat"));
         console.log(/\bcat\b/.test("catsasascat"));
 
+        var animalCount = /\b\d+ (pig|cow|chiken)s?\b/;
+
+        console.log(animalCount.test("15 pigs"));
+
+        console.log(animalCount.test("15 pigchickens"));
+
     </script>
 </body>
 </html>
