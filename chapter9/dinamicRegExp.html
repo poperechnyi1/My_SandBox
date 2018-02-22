@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var name = "гарри";
+        var text = "А у Гарри на лбу шрам.";
+        var regexp = new RegExp("\\b(" + name + ")\\b", "gi");
+        console.log(text.replace(regexp, "_$1_"));
+
+        var name = "dea+hl[]rd";
+        var text = "Этот dea+hl[]rd всех достал.";
+        var escaped = name.replace(/[^\w\s]/g, "\\$&");
+        console.log(escaped);
+        var regexp = new RegExp("\\b(" + escaped + ")\\b", "gi");
+        console.log(text.replace(regexp, "_$1_"));
+    </script>
+</body>
+
+</html>
