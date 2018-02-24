@@ -38,6 +38,18 @@
 
         console.log("Банан".match(/ан/g).length);
 
+        ///////////////////////////////////////
+
+        var input = "Строчка с 3 числами в ней... 42 и 88.";
+
+        var number = /\b(\d+)\b/g;
+
+        var match;
+
+        while(match = number.exec(input))
+            console.log("Нашёл ", match[1], " на ", match.index);
+
+
     </script>
 </body>
 
