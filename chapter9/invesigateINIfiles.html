@@ -15,8 +15,15 @@
         
 
         function parserINI(string) {
-            
+            var currentSection = {name: null, fields: []};
+            var categories = [currentSection];
+
+            string.split(/\r?\n/).forEach(element => {
+                console.log(element);               
+            });
         }
+
+        parserINI(dataFormINIFile);
 
 
     </script>
