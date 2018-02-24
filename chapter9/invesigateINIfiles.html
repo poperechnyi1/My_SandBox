@@ -11,20 +11,31 @@
 <body>
     <!-- <script src="file.ini"></script> -->
     <script>
-        var dataFormINIFile = "searchengine = http: //www.google.com/search?q=$1\nspitefulness = 9.7\n\n; перед комментариями ставится точка с запятой\n; каждая секция относится к отдельному врагу \n[larry]\nfullname = Larry Doe\ntype = бычара из детсада\nwebsite = http: //www.geocities.com/CapeCanaveral/11451\n\n[gargamel]\nfullname = Gargamel\ntype = злой волшебник\noutputdir = /home/marijn / enemies / gargamel";
+        var dataFormINIFile = "searchengine=http://www.google.com/search?q=$1\nspitefulness=9.7\n\n; перед комментариями ставится точка с запятой\n; каждая секция относится к отдельному врагу \n[larry]\nfullname=LarryDoe\ntype=бычара из детсада\nwebsite=http://www.geocities.com/CapeCanaveral/11451\n\n[gargamel]\nfullname=Gargamel\ntype=злой волшебник\noutputdir=/home/marijn/enemies/gargamel";
         
 
         function parserINI(string) {
             var currentSection = {name: null, fields: []};
             var categories = [currentSection];
 
-            string.split(/\r?\n/).forEach(element => {
-                console.log(element);               
+            string.split(/\r?\n/).forEach(line => {
+                // console.log(line);     
+                var match;
+                if(/^\s*(;.*)?$/.test(line)){
+                    return;
+                } else if(match = line.match(/^\[(.*)\]$/)) {
+                    currentSection = {name: match[1], fields: []};
+                    categories.push(currentSection);
+                } else if (match = line.match(/^(\w+)=(.*)$/)) {
+                    currentSection.fields.push({name: match[1], value: match[2]});
+                } else {
+                    throw new Error("Строчка '" + line + "' содержит неверные данные.");
+                }
             });
+            console.log(categories);
         }
 
         parserINI(dataFormINIFile);
-
 
     </script>
 </body>
