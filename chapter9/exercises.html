@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        verify(/\w{2,3} cats|car/, ["my car", "bad cats"], ["camper", "high art"]);
+        
+
+        verify(/\w{3} [cultrepos]{5,7}/, ["pop culture", "mad props"], ["plop"]);
+
+        verify(/\bfer+(et)|y|ari\b/, ["ferret", "ferry", "ferrari"], ["ferrum", "transfer A"]);
+
+        verify(/[^rn] [rdl]/, ["how deliciuos", "spacious room"], ["ruinous", "consciousness"]);
+
+        verify(/\w{3} \w{11} ./, ["bad punctuation ."], ["escape the dot"]);
+
+        verify(/hott+entot(ten)+/, ["hottentottententen"], ["no", "hotten totten tenten"]);
+        //[^athl]
+        verify(/wobbling|red platypus|nest/, ["red platypus", "wobbling nest"], ["earth bed", "learning ape"]);
+
+        function verify(regexp, yes, no) {
+            // Ignore unfinished exercises
+            if (regexp.source == "...") return;
+            yes.forEach(function (s) {
+                if (!regexp.test(s))
+                    console.log("Не нашлось '" + s + "'");
+            });
+            no.forEach(function (s) {
+                if (regexp.test(s))
+                    console.log("Неожиданное вхождение '" + s + "'");
+            });
+        }
+
+    </script>
+</body>
+
+</html>
