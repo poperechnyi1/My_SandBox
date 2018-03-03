@@ -53,6 +53,20 @@
         verify(/\w{7,}/, ["hottentottententen"], ["no", "hotten totten tenten"]);
 
         verify(/\b[^\We]+\b/i, ["red platypus", "wobbling nest"], ["earth bed", "learning ape"]); //????
+
+
+        //quotation marks in the text
+        var text = '\'haven\'t\', \'can\'t\', \'aren\'t\', \'dosen\'t\'';
+        console.log("Before processing ",text);
+
+        var arrayStrings = text.split(", ");        
+        var arraAfterProcessing = [];
+
+        arrayStrings.forEach(element => {
+            arraAfterProcessing.push(element.replace(/^\'|\'$/g,"\""));
+        })
+
+        console.log("Result", arraAfterProcessing.join(", "));
     </script>
 </body>
 
