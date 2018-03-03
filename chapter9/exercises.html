@@ -57,16 +57,36 @@
 
         //quotation marks in the text
         var text = '\'haven\'t\', \'can\'t\', \'aren\'t\', \'dosen\'t\'';
-        console.log("Before processing ",text);
+        console.log("Before processing ", text);
 
-        var arrayStrings = text.split(", ");        
+        var arrayStrings = text.split(", ");
         var arraAfterProcessing = [];
 
         arrayStrings.forEach(element => {
-            arraAfterProcessing.push(element.replace(/^\'|\'$/g,"\""));
+            arraAfterProcessing.push(element.replace(/^\'|\'$/g, "\""));
         })
 
         console.log("Result", arraAfterProcessing.join(", "));
+
+
+        // Fill in this regular expression.
+        
+        let number = /^\d[^a]$|^(-|\+|[.])?\d+$|^\d[.][\de]+$|^\d[eE][+-]\d+$/;
+        // Tests:
+        for (let str of ["1", "-1", "+15", "1.55", ".5", "5.",
+                "1.3e2", "1E-4", "1e+12"
+            ]) {
+            if (!number.test(str)) {
+                console.log(`Failed to match '${str}'`);
+            }
+        }
+        for (let str of ["1a", "+-1", "1.2.3", "1+1", "1e4.5",
+                ".5.", "1f5", "."
+            ]) {
+            if (number.test(str)) {
+                console.log(`Incorrectly accepted '${str}'`);
+            }
+        }
     </script>
 </body>
 
