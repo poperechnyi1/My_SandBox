@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
     <script>
         function evalAndReturnX(code) {
@@ -15,10 +17,56 @@
 
         console.log(evalAndReturnX("var x = 2"));
 
-        var plusOne = new Funciton("n", "return n + 1");
+        var plusOne = new Function("n", "return n + 1");
         console.log(plusOne(4));
 
-        
+
+        ////////////////////////////////////////////////////////////////////////
+
+        function require(name) {
+            if(name in require.cache)
+                return require.cache[name];
+
+            var code = new Function("exports", readFile(name));
+            var exports = {}, module = {exports:exports};
+            code(exports, module);
+
+            require.cache[name] = module.exports;
+            return module.exports;
+        }
+
+        require.cache = Object.create(null);
+
+        console.log(require("weekDay").name(1));
+
+        var names = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"];
+
+        exports.name = function (number) {
+            return names[number];
+        };
+
+        exports.name = function (name) {
+            return names.indexOf(name);
+        };
+
+        var weekDay = require("weekDay");
+        var today = require("today");
+
+        console.log(weekDay.name(today.dayNumber()));
+
+        var weekDay = function () {
+            var names = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"];
+            return {
+                name: function (number) {
+                    return names[number];
+                },
+                number: function (name) {
+                    return names.indexOf(name);
+                }
+            }
+        }();
+
     </script>
 </body>
+
 </html>
