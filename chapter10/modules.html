@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var dayName = function (number) {
+            var names = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"];
+            return function (number) {
+                return names[number];
+            };
+        }();
+
+        console.log(dayName(0));
+
+        (function () {
+            function square(x) {
+                return x * x;
+            }
+            var hundred = 100;
+
+            console.log(square(hundred));
+        })();
+    </script>
+</body>
+
+</html>
