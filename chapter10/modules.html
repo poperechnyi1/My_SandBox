@@ -27,6 +27,39 @@
 
             console.log(square(hundred));
         })();
+
+        var weekDay = function () {
+            var names = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"];
+            return {
+                name: function (number) {
+                    return names[number];
+                },
+                number: function (name) {
+                    return names.indexOf(name);
+                }
+            }
+        }();
+
+        console.log(weekDay.name(weekDay.number("Воскресенье")));
+
+        //////////////////////////////////////
+
+        (
+            function(exports) {
+                var names = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"];
+
+                exports.name = function(number) {
+                    return names[number];
+                };
+
+                exports.number = function(name) {
+                    return names.indexOf(name);
+                };
+
+            }
+        )(this.weekDay = {});
+
+        console.log(weekDay.name(weekDay.number("Четверг")));
     </script>
 </body>
 
