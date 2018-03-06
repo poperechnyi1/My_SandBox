@@ -207,33 +207,30 @@
                 }
             }
         };
- 
+
 
         function View(world, vector) {
             this.world = world;
             this.vector = vector;
-        }
-
-        View.prototype.look = function (dir) {
-            var target = this.vector.plus(directions[dir]);
-            if (this.world.grid.isInside(target))
-                return charFromElement(this.world.grid.get(target));
-            else
-                return "#";
-        };
-
-        View.prototype.findAll = function (ch) {
-            var found = [];
-            for (var dir in directions)
-                if (this.look(dir) == ch)
-                    found.push(dir);
-            return found;
-        }
-
-        View.prototype.find = function (ch) {
-            var found = this.findAll(ch);
-            if (found.length == 0) return null;
-            return randomElement(found);
+            this.look = function (dir) {
+                var target = this.vector.plus(directions[dir]);
+                if (this.world.grid.isInside(target))
+                    return charFromElement(this.world.grid.get(target));
+                else
+                    return "#";
+            };
+            this.findAll = function (ch) {
+                var found = [];
+                for (var dir in directions)
+                    if (this.look(dir) == ch)
+                        found.push(dir);
+                return found;
+            };
+            this.find = function (ch) {
+                var found = this.findAll(ch);
+                if (found.length == 0) return null;
+                return randomElement(found);
+            }
         }
 
         for (var i = 0; i < 5; i++) {
@@ -287,22 +284,33 @@
 
         function LifelikeWorld(map, legend) {
             World.call(this, map, legend);
+            this.prototype = Object.create(World.prototype);
+            this.letAct = function (critter, vector) {
+                var action = critter.act(new View(this, vector));
+                var handled = action && action.type in actionTypes && actionTypes[action.type].call(this, critter,
+                    vector, action);
+                if (!handled) {
+                    critter.energy -= 0.2;
+                    if (critter.energy <= 0)
+                        this.grid.set(vector, null);
+                }
+            };
         }
 
-        LifelikeWorld.prototype = Object.create(World.prototype);
+        // LifelikeWorld.prototype = Object.create(World.prototype);
 
         var actionTypes = Object.create(null);
 
-        LifelikeWorld.prototype.letAct = function (critter, vector) {
-            var action = critter.act(new View(this, vector));
-            var handled = action && action.type in actionTypes && actionTypes[action.type].call(this, critter,
-                vector, action);
-            if (!handled) {
-                critter.energy -= 0.2;
-                if (critter.energy <= 0)
-                    this.grid.set(vector, null);
-            }
-        }
+        // LifelikeWorld.prototype.letAct = function (critter, vector) {
+        //     var action = critter.act(new View(this, vector));
+        //     var handled = action && action.type in actionTypes && actionTypes[action.type].call(this, critter,
+        //         vector, action);
+        //     if (!handled) {
+        //         critter.energy -= 0.2;
+        //         if (critter.energy <= 0)
+        //             this.grid.set(vector, null);
+        //     }
+        // }
 
         actionTypes.grow = function (critter) {
             critter.energy += 0.5;
