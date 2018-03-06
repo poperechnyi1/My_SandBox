@@ -1,0 +1,27 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var month = function () {
+            var month = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
+            return {
+                name: function (number) {
+                    return month[number - 1];
+                },
+                number: function (name) {
+                    return month.indexOf(name) + 1;
+                }
+            } 
+        }();
+
+        console.log(month.name(2));
+
+        console.log(month.number("Апрель"));
+    </script>
+</body>
+</html>
