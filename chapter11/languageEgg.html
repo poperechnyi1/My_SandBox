@@ -110,10 +110,8 @@
                         throw new ReferenceError("Неопределённая переменная: " +
                             expr.name);
                 case "apply":
-                    if (expr.operator.type == "word" &&
-                        expr.operator.name in specialForms)
-                        return specialForms[expr.operator.name](expr.args,
-                            env);
+                    if (expr.operator.type == "word" && expr.operator.name in specialForms)
+                        return specialForms[expr.operator.name](expr.args, env);
                     var op = evaluate(expr.operator, env);
                     if (typeof op != "function")
                         throw new TypeError("Приложение не является функцией.");
