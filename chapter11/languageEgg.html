@@ -9,28 +9,6 @@
 
 <body>
     <script>
-        // do(define(x, 10),
-        //     if ( > (x, 5)),
-        //     print("много"),
-        //     print("мало"))
-
-        // {
-        //     type: "apply",
-        //     operator: {
-        //         type: "word",
-        //         name: ">"
-        //     },
-        //     args: [{
-        //             type: "word",
-        //             name: "x"
-        //         },
-        //         {
-        //             type: "value",
-        //             value: 5
-        //         }
-        //     ]
-        // }
-
         function parseExpression(program) {
             program = skipSpace(program);
             var match, expr;
@@ -63,7 +41,6 @@
 
         function parseApply(expr, program) {
             program = skipSpace(program);
-
             if (program[0] != "(")
                 return {
                     expr: expr,
@@ -85,7 +62,6 @@
                 else if (program[0] != ")")
                     throw new SyntaxError("Ожидается ',' или ')'");
             }
-
             return parseApply(expr, program.slice(1));
         }
 
@@ -96,7 +72,6 @@
             return result.expr;
         }
 
-        console.log(parse("+(a, 10)"));
 
         function evaluate(expr, env) {
             switch (expr.type) {
@@ -136,28 +111,60 @@
         specialForms["while"] = function (args, env) {
             if (args.length != 2)
                 throw new SyntaxError("Неправильное количество аргументов для while");
-            
-            while (evaluate(args[0], env) != false)
-                evaluate(args[1], env);
-            
-            return false;
-        }
 
-        specialForms["do"] = function(args, env) {
+            while (evaluate(args[0], env) !== false)
+                evaluate(args[1], env);
+
+            // Поскольку undefined не задано в Egg,
+            // за отсутствием осмысленного результата возвращаем false
+            return false;
+        };
+
+        specialForms["do"] = function (args, env) {
             var value = false;
-            args.forEach(function(arg) {
+            args.forEach(function (arg) {
                 value = evaluate(arg, env);
             });
             return value;
-        }
+        };
 
-        specialForms["define"] = function(args, env) {
+        specialForms["define"] = function (args, env) {
             if (args.length != 2 || args[0].type != "word")
                 throw new SyntaxError("Bad use of define");
             var value = evaluate(args[1], env);
             env[args[0].name] = value;
             return value;
+        };
+
+        var topEnv = Object.create(null);
+
+        topEnv["true"] = true;
+        topEnv["false"] = false;
+
+        var prog = parse("if(true, false, true)");
+        console.log(evaluate(prog, topEnv));
+
+        ["+", "-", "*", "/", "==", "<", ">"].forEach(function (op) {
+            topEnv[op] = new Function("a, b", "return a " + op + " b;");
+        });
+
+        topEnv["print"] = function (value) {
+            console.log(value);
+            return value;
         }
+
+        function run() {
+            var env = Object.create(topEnv);
+            var program = Array.prototype.slice.call(arguments, 0).join("\n");
+            return evaluate(parse(program), env);
+        }
+
+        run("do(define(total, 0),",
+            "   define(count, 1),",
+            "   while(<(count, 11),",
+            "         do(define(total, +(total, count)),",
+            "            define(count, +(count, 1)))),",
+            "   print(total))");
     </script>
 </body>
 
