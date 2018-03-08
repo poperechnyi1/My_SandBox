@@ -165,6 +165,28 @@
             "         do(define(total, +(total, count)),",
             "            define(count, +(count, 1)))),",
             "   print(total))");
+        
+        specialForms["fun"] = function (args, env) {
+            if (!args.length)
+                throw new SyntaxError("Функции нужно тело");
+
+            function name(expr) {
+                if (expr.type != "word")
+                    throw new SyntaxError("Имена аргументов должны быть типа word");
+                return expr.name;
+            }
+            var argNames = args.slice(0, args.length - 1).map(name);
+            var body = args[args.length - 1];
+
+            return function () {
+                if (arguments.length != argNames.length)
+                    throw new TypeError("Неверное количество аргументов");
+                var localEnv = Object.create(env);
+                for (var i = 0; i < arguments.length; i++)
+                    localEnv[argNames[i]] = arguments[i];
+                return evaluate(body, localEnv);
+            };
+        };
     </script>
 </body>
 
