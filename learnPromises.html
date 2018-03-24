@@ -1,0 +1,59 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+    function applyForVisa(documents) {
+        console.info('Handle promises');
+        let promise = new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                Math.random() > 0 ? resolve({}) : reject('В визе отказано: нехватка документов');
+            }, 2000);
+        });
+
+        return promise;
+    }
+
+    function bookHotel(visa) {
+        console.log(visa);
+        console.log('Reserving hotel');
+        return Promise.resolve(visa);
+    }
+
+    function buyTickets(booking) {
+        console.log('Buing tikets');
+        console.log('Reserv ', booking);
+
+    }
+
+    function getVisa(visa) {
+        console.info('Visa is ready');
+        return new Promise(function (resolve, reject) {
+//            resolve(visa);
+            setTimeout(() => resolve(visa), 2000)
+        });
+    }
+
+    applyForVisa({})
+        .then(getVisa)
+        .then(bookHotel)
+        .then(buyTickets)
+        .catch(error => console.error(error))
+
+
+
+    //    function (visa) {
+    //        console.info('Visa is ready');
+    //    }, function (reson) {
+    //        console.error(reson)
+    //    }
+
+</script>
+</body>
+</html>
