@@ -13,6 +13,10 @@
 // }
 
 let randomGenerator = {
+    generate(){
+        return this[Symbol.iterator]();
+    },
+
     [Symbol.iterator]() {
         let count = 0;
         return {
@@ -26,7 +30,42 @@ let randomGenerator = {
     }
 };
 
-let random = randomGenerator[Symbol.iterator]();
+let random = randomGenerator.generate();
 console.log(random.next().value);
+
+
+class TaskList {
+    constructor(){
+        this.task = [];
+    }
+    addTasks(...tasks){
+        this.tasks = this.tasks.concat(tasks);
+    }
+
+    [Symbol.iterator](){
+        let tasks = this.tasks;
+        let index = 0;
+
+        return {
+            next() {
+                let result = {value: undefined, done: true};
+
+                if(index < tasks.length)
+                {
+                    result.value = tasks[index];
+                    result.done = false;
+                    index += 1;
+                }
+                return result;
+            }
+        }
+    }
+}
+
+let tasList = new TaskList();
+
+tasList.addTasks('Learn JavaScript', 'Learn ES6', 'Buy food');
+
+
 
 
