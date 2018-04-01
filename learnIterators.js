@@ -12,59 +12,75 @@
 //     next = iterator.next();
 // }
 
-let randomGenerator = {
-    generate(){
-        return this[Symbol.iterator]();
-    },
+// let randomGenerator = {
+//     generate(){
+//         return this[Symbol.iterator]();
+//     },
+//
+//     [Symbol.iterator]() {
+//         let count = 0;
+//         return {
+//             next() {
+//                 let value = Math.ceil(Math.random() * 100);
+//                 let done = count > 9;
+//                 count += 1;
+//                 return { value, done};
+//             }
+//         };
+//     }
+// };
+//
+// let random = randomGenerator.generate();
+// console.log(random.next().value);
 
-    [Symbol.iterator]() {
-        let count = 0;
-        return {
-            next() {
-                let value = Math.ceil(Math.random() * 100);
-                let done = count > 9;
-                count += 1;
-                return { value, done};
-            }
-        };
-    }
-};
 
-let random = randomGenerator.generate();
-console.log(random.next().value);
-
-
-class TaskList {
-    constructor(){
-        this.task = [];
-    }
-    addTasks(...tasks){
-        this.tasks = this.tasks.concat(tasks);
+class ArrayIterator {
+    constructor(array) {
+        this.array = array.map(item => item).sort();
+        this.index = 0;
     }
 
-    [Symbol.iterator](){
-        let tasks = this.tasks;
-        let index = 0;
+    next() {
+        let result = { value: undefined, done: true };
 
-        return {
-            next() {
-                let result = {value: undefined, done: true};
-
-                if(index < tasks.length)
-                {
-                    result.value = tasks[index];
-                    result.done = false;
-                    index += 1;
-                }
-                return result;
-            }
+        if (this.index < this.array.length) {
+            result.value = this.array[this.index];
+            result.done = false;
+            this.index += 1;
         }
+
+        return result;
     }
 }
 
-let tasList = new TaskList();
+class TaskList {
+    constructor() {
+        this.tasks = [];
+    }
 
-tasList.addTasks('Learn JavaScript', 'Learn ES6', 'Buy food');
+    addTasks(...tasks) {
+    this.tasks = this.tasks.concat(tasks);
+}
+
+[Symbol.iterator]()
+{
+    // let tasks = this.tasks;
+    // let index = 0;
+
+    return new ArrayIterator(this.tasks)
+
+}
+}
+
+let taskList = new TaskList();
+
+taskList.addTasks('Learn JavaScript', 'Learn ES6', 'Buy food');
+
+for (let task of taskList) {
+    console.log(task);
+}
+
+
 
 
 
