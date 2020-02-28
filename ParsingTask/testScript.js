@@ -1,5 +1,5 @@
 const checkPrimitive = require("./checkPrimitivesLibrary");
-const convertToJSON = require("./parsingData");
+const parsing = require("./parsingData");
 
 const labels = [
   '"":"tie","1":"nail polish"',
@@ -39,12 +39,7 @@ function parsingObject() {
     }
   });
 
-  convertToJSON.convertToJson(report);
+  console.log("Result ", parsing.convertToResult(report));
 }
 
 parsingObject();
-
-// console.log(report);
-// console.log("Length is ", report.length);
-
-// [{ Tie : 1 },{Nail Polish: 1},{ Shoes: 1, type: brown },{ Rings: 2 , type: [Diamond , Gold] },{T-Shirt: 1, type: white},{Pants: 3, type: [ black, Jeans, Dress] },{Hats: 1},{ Total Distinct Labels: 7},{Total Non-Alpha: 5 }]
