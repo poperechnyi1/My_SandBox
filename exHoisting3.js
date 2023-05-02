@@ -10,3 +10,9 @@ function bigBrother() {
 
 // Before running this code, what do you think the output is?
 console.log(bigBrother());
+
+if (5 > 4) {
+  var secret = "12345";
+}
+
+console.log(secret);
