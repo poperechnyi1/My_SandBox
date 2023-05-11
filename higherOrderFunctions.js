@@ -21,15 +21,3 @@ function letPerson(person, fn) {
 function sing(person) {
   return "la la la my name is " + person.name;
 }
-
-// console.log(letPerson({ level: "admin", name: "Tim" }, giveAccessTo));
-const multiplyBy = function (num1) {
-  return function (num2) {
-    return num1 * num2;
-  };
-};
-
-const multiplyByArrowFn = (num1) => (num2) => num1 * num2;
-
-const multiplyByTwo = multiplyBy(2);
-console.log(multiplyByTwo(4));
