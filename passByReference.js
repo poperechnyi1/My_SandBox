@@ -18,6 +18,6 @@ function change(number, string, obj1, obj2) {
 change(number, string, obj1, obj2);
 
 //Guess the outputs here before you run the code:
-console.log(number); //undefine
-console.log(string); //Pete
-console.log(obj1.value); // c
+console.log(number); //100
+console.log(string); //Jay
+console.log(obj1.value); // a
